@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IMPACTA Industry Master Cheatsheet</title>
+  <link rel="icon" type="image/x-icon" href="img/logo-mobile-2025">
+  <link rel="icon" href="img/favicon-2025.png" type="image/png">
+  <style>
+    :root{
+      --brand: #0c62ab;      /* IMPACTA blue */
+      --ink: #0f172a;
+      --muted: #475569;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --highlight: #eff6ff;
+    }
+    
+    * { box-sizing: border-box; }
+    
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+      padding-bottom: 60px;
+      
+      /* DISABLE SELECTION */
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10 and IE 11 */
+      user-select: none; /* Standard syntax */
+    }
+
+    /* Header */
+    header {
+      background: var(--card);
+      border-bottom: 4px solid var(--brand);
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    h1 { margin: 0; color: var(--brand); font-size: 24px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .subtitle { color: var(--muted); font-size: 14px; margin-top: 4px; font-weight: 500; }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Section Cards */
+    .industry-section {
+      background: var(--card);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    
+    .section-header {
+      background: var(--brand);
+      color: white;
+      padding: 12px 20px;
+      font-weight: 700;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Table Styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    
+    th {
+      background: #f1f5f9;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+    }
+    
+    td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fafc; }
+
+    /* Column Specifics */
+    .col-industry { width: 18%; font-weight: 700; color: var(--brand); }
+    .col-sqa { width: 30%; }
+    .col-leak { width: 26%; }
+    .col-fix { width: 26%; }
+
+    /* Badges & Tags */
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .tag-sqa { background: #dbeafe; color: #1e40af; }
+    .tag-leak { background: #fee2e2; color: #991b1b; }
+    .tag-fix { background: #dcfce7; color: #166534; }
+
+    ul { margin: 4px 0 0 16px; padding: 0; color: var(--muted); font-size: 13.5px; }
+    li { margin-bottom: 4px; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* HIDE CONTENT ON PRINT */
+    @media print {
+      html, body { display: none; }
+    }
+  </style>
+</head>
+<body oncontextmenu="return false;">
+
+<header>
+  <div class="header-content">
+    <div>
+      <h1>Master Industry Cheatsheet</h1>
+      <div class="subtitle">Pain Points, Revenue Leaks, and SQA Targets</div>
+    </div>
+    <div style="text-align:right; font-size:12px; color:var(--muted);">
+      <strong>IMPACTA Business Solutions</strong><br>
+      Internal Sales Enablement Asset
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="industry-section">
+    <div class="section-header">Automotive Services</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="col-industry">Niche</th>
+          <th class="col-sqa">Primary Appointment Target (SQA)</th>
+          <th class="col-leak">Revenue Leak (The Pain)</th>
+          <th class="col-fix">The Fix (Diagnostic Value)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tinting & Accessories</td>
+          <td>
+            <span class="tag tag-sqa">High Value Quote</span>
+            <div>Full ceramic tint, PPF, or bundles meeting min. value.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Missed quote calls/voicemails.</li>
+              <li>Slow web form response.</li>
+              <li>Failure to upsell basic tint to ceramic.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Audit intake speed gaps.</li>
+              <li>Implement rapid SMS automation.</li>
+              <li>Scripting for "Basic to Ceramic" upsell.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Detailing</td>
+          <td>
+            <span class="tag tag-sqa">Ceramic / Paint Correction</span>
+            <div>Specific high-value packages (Interior/Exterior restoration).</div>
+          </td>
+          <td>
+            <ul>
+              <li>Booking conflicts (scheduling chaos).</li>
+              <li>Slow response to complex job inquiries.</li>
+              <li>Low conversion from wash to detail.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Analyze booking efficiency.</li>
+              <li>Automate reminders to stop no-shows.</li>
+              <li>Nurture for recurring maintenance.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Auto Repair (Indep.)</td>
+          <td>
+            <span class="tag tag-sqa">Diagnostic / Major Repair</span>
+            <div>Engine, transmission, electrical (Not basic oil changes).</div>
+          </td>
+          <td>
+            <ul>
+              <li>Missed calls during peak hours.</li>
+              <li>Bay downtime due to scheduling.</li>
+              <li>No follow-up on "Recommended Services".</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Online booking integration.</li>
+              <li>Automated service reminders.</li>
+              <li>Re-activation of declined services.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Auto Dealership</td>
+          <td>
+            <span class="tag tag-sqa">Sales & Service</span>
+            <div><strong>Sales:</strong> Qualified Test Drive.<br><strong>Service:</strong> Major customer-pay work.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Slow internet lead response (Speed-to-Lead).</li>
+              <li>BDC booking unqualified leads.</li>
+              <li>Service lane upsell failure.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Audit BDC qualification process.</li>
+              <li>Rapid response automation.</li>
+              <li>Service-to-Sales conversion tracking.</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="industry-section">
+    <div class="section-header">Construction & Trades</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="col-industry">Niche</th>
+          <th class="col-sqa">Primary Appointment Target (SQA)</th>
+          <th class="col-leak">Revenue Leak (The Pain)</th>
+          <th class="col-fix">The Fix (Diagnostic Value)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Roofing / Restoration</td>
+          <td>
+            <span class="tag tag-sqa">Inspection / Quote</span>
+            <div>Property owner confirmed. Specific leak or age issue.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Missed calls during storms.</li>
+              <li>Sales reps driving to "tire kickers".</li>
+              <li>No follow-up on sent quotes.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Strict SQA criteria (Gatekeeping).</li>
+              <li>Rapid response to web leads.</li>
+              <li>Automated quote follow-up pipeline.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>HVAC / Plumbing / Electric</td>
+          <td>
+            <span class="tag tag-sqa">Service Call / Install</span>
+            <div><strong>Urgent:</strong> Diagnostic call.<br><strong>Project:</strong> System replacement quote.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Missed emergency calls (Revenue lost instantly).</li>
+              <li>Inefficient dispatching.</li>
+              <li>Technicians failing to quote replacements.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>24/7 Missed Call Text-Back.</li>
+              <li>Online booking for service calls.</li>
+              <li>Maintenance membership automation.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Landscaping</td>
+          <td>
+            <span class="tag tag-sqa">Design / Commercial</span>
+            <div>High-value install project OR Commercial maintenance contract.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Quoting low-margin "mow and blow".</li>
+              <li>Routing inefficiencies.</li>
+              <li>Upsell failure (Mulch/Color/Lighting).</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Pre-qualify leads via web form.</li>
+              <li>Upsell automation for existing clients.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Pest Control</td>
+          <td>
+            <span class="tag tag-sqa">Recurring Plan Start</span>
+            <div>Initial treatment converting to annual plan.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Missed urgent calls.</li>
+              <li>One-off jobs not converting to subscriptions.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Route density optimization.</li>
+              <li>Sales scripts for "One-time to Recurring" conversion.</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="industry-section">
+    <div class="section-header">Healthcare & Medical</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="col-industry">Niche</th>
+          <th class="col-sqa">Primary Appointment Target (SQA)</th>
+          <th class="col-leak">Revenue Leak (The Pain)</th>
+          <th class="col-fix">The Fix (Diagnostic Value)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>General / Specialty</td>
+          <td>
+            <span class="tag tag-sqa">New Patient Consult</span>
+            <div>Initial exam, insurance verified.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Long hold times / Missed calls.</li>
+              <li>Complex online booking (abandonment).</li>
+              <li>High New Patient no-show rates.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Analyze call capacity.</li>
+              <li>Streamline online booking UX.</li>
+              <li>Pre-appointment SMS workflows.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Dentistry</td>
+          <td>
+            <span class="tag tag-sqa">Cosmetic / Implant</span>
+            <div>High-value restorative (Veneers, Invisalign) or New Patient Exam.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Front desk missing new patient calls.</li>
+              <li>Failure to close large treatment plans.</li>
+              <li>Poor recall system (6-month checkups).</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Automate hygiene recall.</li>
+              <li>Follow-up sequences for unbooked treatment plans.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Chiropractic</td>
+          <td>
+            <span class="tag tag-sqa">New Patient Exam</span>
+            <div>Initial consult + adjustment. Complaint confirmed.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Missed "In Pain Now" calls.</li>
+              <li>Drop-off after initial consult (retention).</li>
+              <li>Dormant patient list (inactive).</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Reactivation campaigns.</li>
+              <li>Post-consult conversion sequences.</li>
+              <li>Online booking for immediate relief.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Ophthalmology</td>
+          <td>
+            <span class="tag tag-sqa">LASIK / Cataract</span>
+            <div>Premium elective procedure consultation.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Front desk overwhelmed by routine calls.</li>
+              <li>Website lacks clear LASIK CTA.</li>
+              <li>Referral leakage from optometrists.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Separate high-value phone queues.</li>
+              <li>Nurture sequences for "Not Ready" leads.</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="industry-section">
+    <div class="section-header">Other High-Value Niches</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="col-industry">Niche</th>
+          <th class="col-sqa">Primary Appointment Target (SQA)</th>
+          <th class="col-leak">Revenue Leak (The Pain)</th>
+          <th class="col-fix">The Fix (Diagnostic Value)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Commercial Cleaning</td>
+          <td>
+            <span class="tag tag-sqa">Facility Walkthrough</span>
+            <div>Commercial building, decision maker, scope confirmed.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Walkthroughs with no budget/authority.</li>
+              <li>Slow RFP response.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>CRM proposal tracking.</li>
+              <li>Targeted B2B outreach.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Veterinary</td>
+          <td>
+            <span class="tag tag-sqa">New Client / Wellness</span>
+            <div>New pet exam or annual wellness check.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Front desk overwhelmed.</li>
+              <li>No online booking.</li>
+              <li>Missed vaccine reminders (LTV).</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Automated health reminders.</li>
+              <li>Online scheduling integration.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Hospitality (Hotels)</td>
+          <td>
+            <span class="tag tag-sqa">Group Sales</span>
+            <div>Event planners / Corporate block bookings.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Slow RFP response time.</li>
+              <li>Unqualified inquiries wasting sales time.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Pinpoint funnel bottleneck.</li>
+              <li>CRM integration for group sales.</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="industry-section">
+    <div class="section-header">Professional Services</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="col-industry">Niche</th>
+          <th class="col-sqa">Primary Appointment Target (SQA)</th>
+          <th class="col-leak">Revenue Leak (The Pain)</th>
+          <th class="col-fix">The Fix (Diagnostic Value)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Legal</td>
+          <td>
+            <span class="tag tag-sqa">Case Consult</span>
+            <div>Viable case in target practice area (PI, Family, etc).</div>
+          </td>
+          <td>
+            <ul>
+              <li>Paralegals wasting time screening.</li>
+              <li>High no-show rates for consults.</li>
+              <li>Slow response to web inquiries.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Intelligent intake forms (Auto-screen).</li>
+              <li>Automated document collection.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Staffing / Recruiting</td>
+          <td>
+            <span class="tag tag-sqa">Hiring Manager Meeting</span>
+            <div>Company with open roles + budget authority.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Low connection rates (Cold calling).</li>
+              <li>Meeting non-decision makers.</li>
+              <li>Dormant client list.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Niche-specific outreach campaigns.</li>
+              <li>Automated nurture of past clients.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Financial / Accounting</td>
+          <td>
+            <span class="tag tag-sqa">Discovery Meeting</span>
+            <div><strong>Fin:</strong> Min. investable assets.<br><strong>Acc:</strong> Business advisory (not just tax).</div>
+          </td>
+          <td>
+            <ul>
+              <li>Time spent on unqualified prospects.</li>
+              <li>Lack of differentiation.</li>
+              <li>Poor referral systems.</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Strict asset/revenue pre-qualification.</li>
+              <li>Client-only events/webinar funnels.</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td>Real Estate</td>
+          <td>
+            <span class="tag tag-sqa">Listing / Buyer Consult</span>
+            <div><strong>Listing:</strong> Motivated seller.<br><strong>Buyer:</strong> Pre-approved + timeline.</div>
+          </td>
+          <td>
+            <ul>
+              <li>Agents chasing "Lookie-Loos".</li>
+              <li>Slow response to Zillow/Portal leads.</li>
+              <li>Ignoring "Sphere of Influence".</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>Speed-to-Lead automation.</li>
+              <li>Long-term "Keep in Touch" automation.</li>
+            </ul>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="footer">
+  &copy; 2026 IMPACTA Business Solutions. All Rights Reserved. <br>
+  Confidential Internal Document. Do Not Distribute.
+</div>
+
+<script>
+  // Block Right Click
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Block Keyboard Shortcuts (Ctrl+C, Ctrl+P, Ctrl+S)
+  document.onkeydown = function(e) {
+    if (e.ctrlKey && 
+       (e.keyCode === 67 || 
+        e.keyCode === 86 || 
+        e.keyCode === 85 || 
+        e.keyCode === 117 ||
+        e.keyCode === 80 ||
+        e.keyCode === 83)) {
+        return false;
+    } else {
+        return true;
+    }
+};
+</script>
+
+</body>
+</html>

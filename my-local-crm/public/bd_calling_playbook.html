@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMPACTA Business Developer Calling Playbook</title>
+        <link rel="icon" type="image/x-icon" href="img/logo-mobile-2025">
+    <link rel="icon" href="img/favicon-2025.png" type="image/png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+
+            /* --- PREVENT HIGHLIGHTING/SELECTING --- */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none;    /* Firefox */
+            -ms-user-select: none;     /* IE10+/Edge */
+            user-select: none;         /* Standard */
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            border-top: 8px solid #0c62ab;
+        }
+
+        /* IMPACTA BRANDING COLOR: #0c62ab */
+        h1, h2, h3, h4 { color: #0c62ab; }
+
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            text-align: center;
+            font-weight: 400;
+            font-size: 20px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #0c62ab;
+            padding-bottom: 20px;
+            color: #555;
+        }
+
+        h3 {
+            background-color: #eef6fc;
+            padding: 12px;
+            border-left: 5px solid #0c62ab;
+            margin-top: 30px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .sub-header {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #0c62ab;
+        }
+
+        ul { margin-bottom: 20px; }
+        li { margin-bottom: 10px; }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0c62ab;
+            color: white;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) { background-color: #f2f8fd; }
+
+        .footer {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+        .page-break {
+            margin-top: 60px;
+            margin-bottom: 60px;
+            border-top: 2px dashed #ccc;
+        }
+
+        .box {
+            border: 2px solid #0c62ab;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(12, 98, 171, 0.05);
+        }
+
+        .objection {
+            font-weight: bold;
+            color: #d32f2f;
+            margin-top: 15px;
+            display: block;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .script-quote {
+            font-style: italic;
+            color: #333;
+            display: block;
+            margin: 5px 0 15px 15px;
+            border-left: 4px solid #0c62ab;
+            padding-left: 12px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #0c62ab;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .goal-text {
+            font-size: 0.9em;
+            color: #0c62ab;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .toc-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            columns: 2;
+        }
+
+        .toc-list li { margin-bottom: 8px; }
+
+        .toc-list a {
+            text-decoration: none;
+            color: #0c62ab;
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+            color: #094a80;
+        }
+
+        /* --- PRINT BLOCKING STYLES --- */
+        @media print {
+            /* Hide everything */
+            body * {
+                display: none !important;
+                visibility: hidden !important;
+            }
+            
+            /* Show warning message */
+            body:before {
+                content: "Printing is disabled for this document.";
+                display: flex !important;
+                visibility: visible !important;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-size: 24px;
+                font-weight: bold;
+                color: #d32f2f;
+            }
+
+            /* Remove backgrounds */
+            html, body {
+                background: #fff !important;
+                height: 100%;
+                overflow: hidden;
+            }
+        }
+    </style>
+</head>
+
+<body oncontextmenu="return false;">
+
+    <div class="container">
+
+        <h1>IMPACTA Business Solutions</h1>
+        <h2>Business Developer Calling Playbook</h2>
+
+        <div class="toc-box">
+            <div
+                style="font-weight: 800; color: #0c62ab; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                Playbook Contents</div>
+            <ul class="toc-list">
+                <li><a href="#offer-stack">1. Current Offer Stack</a></li>
+                <li><a href="#calling-script">2. Calling Script</a></li>
+                <li><a href="#objection-handling">3. Objection Handling</a></li>
+                <li><a href="#discovery-routing">4. Discovery & Routing</a></li>
+                <li><a href="#email-sms">5. Email & SMS Sequences</a></li>
+                <li><a href="#diagnostic-structure">6. 15-Min Diagnostic Structure</a></li>
+                <li><a href="#quality-control">7. Quality Control + Scorecards</a></li>
+                <li><a href="#metrics-targets">8. Metrics + Targets</a></li>
+            </ul>
+        </div>
+
+        <p><strong>Calling script + discovery questions for current offer stack</strong></p>
+
+        <h3 id="offer-stack">Current Offer Stack</h3>
+        <ul>
+            <li><strong>Free:</strong> 3-Point GBP Diagnostic</li>
+            <li><strong>$350:</strong> 48-Hour Fix (one bottleneck implemented fast)</li>
+            <li><strong>$350:</strong> Revenue Leak Diagnostic (identify the leak + recommend the right fix)</li>
+        </ul>
+
+        <div class="box">
+            <div class="sub-header">Quick Routing Rule</div>
+            <p>When in doubt, route the prospect based on clarity of the problem:</p>
+            <ul>
+                <li><strong>They know the problem</strong> (missed calls / no follow-up / no-shows / no CRM) -
+                    <strong>$350 48-Hour Fix</strong>
+                </li>
+                <li><strong>They don't know the problem</strong> or everything feels messy - <strong>$350 Revenue Leak
+                        Diagnostic</strong></li>
+                <li><strong>They're cold / skeptical</strong> / you need an easy yes - <strong>Free 3-Point GBP
+                        Diagnostic first</strong></li>
+            </ul>
+        </div>
+
+        <div class="sub-header">48-Hour Fix Boundaries (Non-Negotiable)</div>
+        <ul>
+            <li>One fix only (one bottleneck). Additional fixes require further implementation.</li>
+            <li>No ongoing management/retainers included.</li>
+            <li>No custom software development.</li>
+            <li>Client access (CRM/GBP/call tracking) required within 24 hours to meet SLA.</li>
+        </ul>
+
+        <div class="footer">Internal use only | Page 1</div>
+
+        <div class="page-break"></div>
+
+        <h1 id="calling-script">Calling Script</h1>
+
+        <h3>Gatekeeper Bypass (Specific Delivery)</h3>
+        <p>"Hi [Name], I'm hoping you might be able to help me. I’m holding a Revenue Leak Report regarding some specific errors on the <strong>Google profile that are blocking leads right now</strong>.</p>
+        <p>I need to get this to the person who handles the P&L or Operations to make sure they see where the drop-off is. Is that the manager or would that be the owner?"</p>
+
+        <h3>1) The Hook (The "Auditor" Frame)</h3>
+        <p class="goal-text">Goal: Establish immediate value. You found a problem. You are the messenger.</p>
+        <ul>
+            <li>"Hi [Name], this is [Your Name] in Ocala. I’m calling because I was auditing your Google listing and I flagged <strong>three specific revenue leaks</strong> where [Company Name] is losing leads to
+                competitors right now."</li>
+            <li>"I’m not selling ads or seo. I just want to show you exactly where the pipe is leaking so you can plug it. Do
+                you have 30 seconds to hear what I found?"</li>
+        </ul>
+
+        <h3>2) Discovery (The Fork in the Road)</h3>
+        <p class="goal-text">Goal: Force them to categorize themselves.</p>
+        <ul>
+            <li>"Usually, when I see these leaks on a profile, it means one of two things is happening internally: <ul
+                    style="margin-top:5px; margin-bottom:5px;">
+                    <li><strong>One:</strong> You’re getting so many leads you’re too busy to answer them all.</li>
+                    <li><strong>Two:</strong> Or, the system isn't set up to catch them when you’re closed.</li>
+                </ul>
+            </li>
+            <li>Which one feels more like your reality today?"</li>
+        </ul>
+
+        <h3>3) The Offer (Low Friction)</h3>
+        <p class="goal-text">Goal: Triage only. Low commitment.</p>
+        <ul>
+            <li>"Okay, that makes sense. Look, I’ve already documented the leaks in a <strong>3-Point Diagnostic
+                    Report</strong>."</li>
+            <li>"I don't want to pitch you anything. I just want 10 minutes to show you the math on how much this is
+                costing you. If you want to fix it, great. If not, you keep the report."</li>
+            <li>"Are you open to a 10-minute briefing tomorrow morning?"</li>
+        </ul>
+
+        <div class="footer">Internal use only | Page 2</div>
+
+        <div class="page-break"></div>
+
+        <h1 id="objection-handling">Objection Handling</h1>
+
+        <div class="box">
+            <span class="objection">“Not interested”</span>
+            <span class="script-quote">“Fair. Before I let you go — are you not interested because you’re fully dialed
+                in, or because you’ve been burned by stuff like this?”</span>
+
+            <p><strong>If “dialed in”:</strong> <span class="script-quote">“Perfect. Quick check: what’s your average
+                    response time to new leads?”</span></p>
+            <p><strong>If they hesitate:</strong> <span class="script-quote">“That’s exactly where revenue leaks hide.
+                    Let’s do a 15-minute triage and you can decide if it’s worth attention.”</span></p>
+
+            <span class="objection">“Send info”</span>
+            <span class="script-quote">“I can — but if I send info without context it’ll look like every other vendor
+                email. Give me 15 minutes and I’ll make it specific to your setup. What’s better — today at [time] or
+                tomorrow at [time]?”</span>
+
+            <span class="objection">“Too busy”</span>
+            <span class="script-quote">“Makes sense — that’s usually a symptom of the leak. This is 15 minutes, designed
+                to save you time by stopping wasted follow-up and missed leads. Do you want to protect revenue this week
+                or keep it on the back burner? I’ve got [two time options].”</span>
+
+            <span class="objection">“We already have marketing”</span>
+            <span class="script-quote">“Good — we’re not replacing marketing. Most revenue leaks happen after marketing:
+                speed-to-lead, missed calls, follow-up, pipeline, show rate. Quick question: when a lead comes in, are
+                you responding in under 5 minutes consistently? If you’re airtight, we’ll shake hands and I’ll
+                disappear.”</span>
+
+            <span class="objection">“How much is it?”</span>
+            <span class="script-quote">“The 15-minute diagnostic is just triage — no cost, no pitch. If there’s one
+                clear bottleneck, the next step could be a 48-Hour Fix. If it’s bigger, the next step is our paid
+                Revenue Leak Diagnostic — positioned as a blueprint, not a sales call. The right price depends on the
+                leak and scope — that’s why we do triage first. Do you have 15 minutes today or tomorrow?”</span>
+
+            <span class="objection">“Why would I pay for a diagnostic?”</span>
+            <span class="script-quote">“Because guessing is expensive. The Revenue Leak Diagnostic isn’t a free pitch —
+                it’s a structured session that identifies the #1 bottleneck, quantifies impact, and gives you a clear
+                action plan. Most owners lose more in one week of missed follow-up than the cost of a proper diagnosis.
+                The 15-minute triage simply confirms if that level of diagnosis is necessary.”</span>
+
+            <span class="objection">“We’ve tried agencies”</span>
+            <span class="script-quote">“Totally understand. Most agencies sell tactics before diagnosis. We start with
+                leaks and constraints: response time, follow-up, pipeline, conversion — then choose the smallest fix
+                that moves revenue fastest. Give me 15 minutes — we’ll confirm whether there’s a fixable bottleneck —
+                and if not, I’ll tell you.”</span>
+
+            <span class="objection">“Call me later”</span>
+            <span class="script-quote">“Sure — when specifically is ‘later’?” (pause)</span>
+            <p><strong>If vague:</strong> <span class="script-quote">“No problem — I can do [two specific times]. Which
+                    one should I lock in for a 15-minute triage?”</span></p>
+            <p><strong>If they resist:</strong> <span class="script-quote">“All good — I’ll send a quick reminder.
+                    What’s the best email/SMS?”</span></p>
+        </div>
+
+        <h3>Close Script (Calendar Control)</h3>
+        <span class="script-quote">
+            “Perfect — I’m sending a calendar invite for [day/time]. This is a 15-minute diagnostic, not a sales call.
+            You need to be in a quiet spot — we’ll move fast. If we confirm a leak, we’ll schedule either a 48-Hour Fix or
+            the paid Revenue Leak Diagnostic as the next step. What’s the best email and cell for the invite and
+            reminders?”
+        </span>
+
+        <p><strong>Lock-in:</strong> “On a scale of 1–10, how likely are you to make that time?”<br>
+            <em>If < 8: “What makes it a 10? Let’s adjust now.”</em>
+        </p>
+
+        <h3>Voicemail Scripts</h3>
+        <p><strong>10s:</strong> <span class="script-quote">“Hey [First Name], it’s [Your Name] with IMPACTA. Quick note
+                — we’re seeing revenue leaks in [Industry] around response time and follow-up. Call me at [Number]. I’ll
+                also send a quick text.”</span></p>
+        <p><strong>20s:</strong> <span class="script-quote">“Hey [First Name], [Your Name] at IMPACTA. We help
+                [Industry] teams plug revenue leaks — missed calls, slow response, and follow-up that lets leads go
+                cold. I’m calling to book a quick 15-minute triage. Call me at [Number] or reply to my text and I’ll
+                send times.”</span></p>
+
+        <div class="footer">Internal use only | Page 3</div>
+
+        <div class="page-break"></div>
+
+        <h1 id="discovery-routing">Discovery & Routing</h1>
+
+        <div class="box">
+            <div class="sub-header">Fix Matching Cheat Sheet</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>What they tell you</th>
+                        <th>Match to Fix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>If it's response time</td>
+                        <td>Speed-to-Lead Fix</td>
+                    </tr>
+                    <tr>
+                        <td>If it's leads not converting</td>
+                        <td>Follow-Up Automation Fix</td>
+                    </tr>
+                    <tr>
+                        <td>If it's booked but not showing</td>
+                        <td>No-Show Reduction Fix</td>
+                    </tr>
+                    <tr>
+                        <td>If it's scattered + messy</td>
+                        <td>Minimum Viable Pipeline (CRM) Fix</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Discovery Questions</h3>
+        <p>Use 6-10 total. Keep it conversational and select the section that matches their bottleneck.</p>
+
+        <div class="box">
+            <h4>A) Speed-to-Lead (Lead Response Speed Fix)</h4>
+            <ul>
+                <li>"When a lead calls and it's missed - do they get an immediate text back right now?"</li>
+                <li>"Do you have a backup person if the first person doesn't answer?"</li>
+                <li>"How fast do web/GBP leads get a response during business hours?"</li>
+                <li>"What happens after hours - do they just... sit until morning?"</li>
+            </ul>
+
+            <h4>B) Follow-Up Automation Fix</h4>
+            <ul>
+                <li>"If someone doesn't book on day one, what happens next?"</li>
+                <li>"Do they have a follow-up sequence over the next 7-14 days - or is it manual?"</li>
+                <li>"How often do leads slip through because nobody follows up after a quote?"</li>
+                <li>"What stops follow-up right now do you stop when they reply/book?"</li>
+            </ul>
+
+            <h4>C) No-Show Reduction Fix</h4>
+            <ul>
+                <li>"Out of 10 booked appointments, how many show up?"</li>
+                <li>"Do they get confirmations and reminders automatically?"</li>
+                <li>"Do you have a clean reschedule flow - or do no-shows just disappear?"</li>
+                <li>"Do you send reminders at 24 hours and 2 hours?"</li>
+            </ul>
+
+            <h4>D) Minimum Viable Pipeline (CRM)</h4>
+            <ul>
+                <li>"Where are leads tracked right now - CRM, spreadsheet, inbox, sticky notes?"</li>
+                <li>"Do you have clear pipeline stages, or does everything live in one bucket?"</li>
+                <li>"Do follow-up tasks get created automatically, or is it dependent on memory?"</li>
+                <li>"Can you see 'new leads' vs 'overdue follow-ups' in one simple dashboard?"</li>
+            </ul>
+
+            <h4>E) Money / Urgency</h4>
+            <ul>
+                <li>"Roughly what's one closed deal worth to you?"</li>
+                <li>"If you fixed just one of these - response time, follow-up, no-shows, or tracking - which would
+                    impact revenue fastest?"</li>
+                <li>"Is the bigger issue volume... or leaking the leads you already get?"</li>
+            </ul>
+        </div>
+
+        <div class="footer">Internal use only | Page 4</div>
+
+        <div class="page-break"></div>
+
+        <h1 id="email-sms">Email & SMS Sequences</h1>
+        <p><strong>Rules:</strong> Short, one idea per message, tie to revenue leaks, CTA is the 15-min triage.</p>
+
+        <h3>Email Templates</h3>
+
+        <div class="box">
+            <span class="tag">Email 1 — Day 0</span>
+            <p><strong>Direct:</strong> <span class="script-quote">Hi [First Name] — I tried calling. We help [Industry]
+                    businesses plug revenue leaks (missed calls, slow response time, inconsistent follow-up). Question:
+                    when a new lead hits [Company], are you responding in under 5 minutes consistently? If not, I can
+                    run a 15-minute triage diagnostic. Book here → [Calendar Link]</span></p>
+            <p><strong>Soft:</strong> <span class="script-quote">Hi [First Name] — I reached out because we’re seeing a
+                    common revenue leak in [Industry]: leads going cold due to response time + follow-up gaps. If you’re
+                    open, I can do a quick 15-minute triage. [Calendar Link]</span></p>
+        </div>
+
+        <div class="box">
+            <span class="tag">Email 2 — Day 1</span>
+            <p><strong>Direct:</strong> <span class="script-quote">Subject: Most [Industry] leaks aren’t marketing.
+                    [First Name] — most revenue leaks aren’t “more leads.” They’re in the middle: speed-to-lead, missed
+                    calls, follow-up. If you tell me which is weakest at [Company], I’ll make the triage specific.
+                    [Calendar Link]</span></p>
+            <p><strong>Soft:</strong> <span class="script-quote">Subject: Where leads go cold. Where do prospects drop
+                    most — lead→appointment, appointment→show, or show→close? I’ll run a 15-minute triage and point you
+                    to the fastest fix path. [Calendar Link]</span></p>
+        </div>
+
+        <div class="box">
+            <span class="tag">Email 3 — Day 3 (Speed)</span>
+            <p><strong>Direct:</strong> <span class="script-quote">Subject: 5-minute response time check. [First Name] —
+                    response time under 5 minutes usually increases booking rates. If [Company] is closer to “same day,”
+                    you’re likely leaking revenue. Want a 15-minute triage to quantify it? [Calendar Link]</span></p>
+        </div>
+
+        <div class="box">
+            <span class="tag">Email 4 — Day 5 (Missed Calls)</span>
+            <p><strong>Direct:</strong> <span class="script-quote">Subject: Missed calls = missed revenue. [First Name]
+                    — do you ever miss calls during the day? If yes, the leak is usually: missed call → no instant
+                    text-back → lead goes cold. We can confirm in 15 minutes. [Calendar Link]</span></p>
+        </div>
+
+        <div class="box">
+            <span class="tag">Email 6 — Day 10 (Breakup)</span>
+            <p><strong>Direct:</strong> <span class="script-quote">Subject: Close the loop? [First Name] — I haven’t
+                    heard back. Usually means: 1) You’re covered, 2) Timing is bad, 3) I should talk to someone else.
+                    Which is it? [Calendar Link]</span></p>
+        </div>
+
+        <h3>SMS Templates</h3>
+        <ul>
+            <li><strong>Day 0:</strong> “Hi [First Name] — [Your Name] with IMPACTA. Quick Q: are leads at [Company]
+                getting a response in under 5 min consistently? If not, I can do a 15-min triage. [Calendar Link]”</li>
+            <li><strong>Day 3:</strong> “Do you lose more prospects at lead→appt, appt→show, or show→close? If you tell
+                me, I’ll tailor the 15-min triage. [Calendar Link]”</li>
+            <li><strong>Day 10:</strong> “Closing the loop, [First Name] — should I (1) close this, (2) follow up next
+                month, or (3) talk to someone else? [Calendar Link]”</li>
+        </ul>
+
+        <div class="footer">Internal use only | Page 5</div>
+
+        <div class="page-break"></div>
+
+        <h1 id="diagnostic-structure">15-Min Diagnostic Structure</h1>
+
+        <div class="box">
+            <div class="sub-header">Minute-by-Minute Agenda</div>
+            <ul>
+                <li><strong>0:00–1:00</strong> Frame: confirm time, triage only, not a pitch</li>
+                <li><strong>1:00–4:00</strong> Current situation: lead sources + handling</li>
+                <li><strong>4:00–8:00</strong> Identify leak: response, calls, follow-up, pipeline</li>
+                <li><strong>8:00–11:00</strong> Quantify impact + urgency + decision path</li>
+                <li><strong>11:00–13:30</strong> Route: tactical fix vs full blueprint</li>
+                <li><strong>13:30–15:00</strong> Schedule next step + confirm attendance</li>
+            </ul>
+        </div>
+
+        <h3>Qualification Checklist</h3>
+        <p>Qualified = <strong>5/6 Yes</strong> with Decision Maker required.</p>
+        <ul>
+            <li>Decision maker? &#9744; Yes &#9744; No</li>
+            <li>Meaningful volume/scale? &#9744; Yes &#9744; No</li>
+            <li>Clear leak exists? &#9744; Yes &#9744; No</li>
+            <li>Urgency (30–60 days)? &#9744; Yes &#9744; No</li>
+            <li>Willing to invest to fix? &#9744; Yes &#9744; No</li>
+            <li>Good attitude / coachable? &#9744; Yes &#9744; No</li>
+        </ul>
+
+        <h3>Verbatim Triage Script</h3>
+        <span class="script-quote">
+            “Hey [First Name] — thanks for taking this. Quick frame: this is a 15-minute triage diagnostic, not a sales
+            call. My job is to find where revenue is leaking and route you to the correct next step.<br><br>
+            First: where does most new business come from today? … About how many leads do you get monthly? … When a
+            lead comes in, how fast do you respond? … Do you miss calls during business hours? … What happens after
+            first contact — consistent follow-up, or manual? … Where do you lose the most: lead→appt, appt→show, or
+            show→close? … If we could fix one bottleneck in 30 days, what would impact revenue fastest? … Are you the
+            one who can approve changes?<br><br>
+            Based on what you shared, the leak is most likely [leak]. The best next step is [48-Hour Fix / Paid Revenue
+            Leak Diagnostic]. I can book that for [Option A] or [Option B]. Which works?”
+        </span>
+
+        <div class="box">
+            <div class="sub-header">Routing the Next Step (The "Live Navigation" Close)</div>
+            <p><strong>The Setup:</strong> <span class="script-quote">“We’ve confirmed the leak. It costs more to leave it broken than to fix it. We don't do invoices or chasing. We treat this like triage—we fix it now. <strong>Are you near a computer or mobile?</strong>”</span></p>
+            
+            <p><strong>The Navigation:</strong> <span class="script-quote">“Great. Go to <strong>[YourWebsite.com/fix]</strong>. You’ll see the page for <strong>'Pipeline Diagnostic & Blueprint'</strong>. Scroll to the blue button <strong>'Secure Your Spot'</strong>.”</span></p>
+
+            <p><strong>The Lock-In:</strong> <span class="script-quote">“Go ahead and click that. It locks in the time for our Strategy Session and processes the $350 fee immediately. <strong>I’ll stay on the line while you punch that in to make sure the calendar syncs on my end.</strong>”</span></p>
+
+            <p><strong>Objection (Can you send an invoice?):</strong> <span class="script-quote">“To keep this at $350 without retainer fees, we’ve automated the admin side. The booking and payment happen together to trigger the work order. I'm on the page now—do you see the button?”</span></p>
+
+            <p><strong>Not Qualified:</strong> <span class="script-quote">“Based on what you shared, I don’t think we’re the right fit right now — I’d rather be direct than waste your time. If things change, let's revisit. Want me to send one relevant resource?”</span></p>
+        </div>
+
+        <div class="footer">Internal use only | Page 6</div>
+
+        <div class="page-break"></div>
+
+        <h1 id="quality-control">Quality Control + Scorecards</h1>
+
+        <div class="box">
+            <div class="sub-header">Call scorecard (10 points) — Pass = 8/10</div>
+            <p><strong>Must include #1, #6, #9 to pass.</strong></p>
+            <ol>
+                <li>Opened with confident hook in <20 seconds</li>
+                <li>Asked permission for two quick questions</li>
+                <li>Stayed in control (no rambling)</li>
+                <li>Identified at least one leak</li>
+                <li>Quantified leak (volume/time/impact)</li>
+                <li>Confirmed decision maker + urgency</li>
+                <li>Used IMPACTA language (revenue leaks, response time, follow-up)</li>
+                <li>Handled objection without arguing</li>
+                <li>Calendar control close (two time options + confirmation)</li>
+                <li>Set expectations + reduced no-show (importance / reminders)</li>
+            </ol>
+        </div>
+
+        <h3>Top 5 Mistakes (and fixes)</h3>
+        <ul>
+            <li><strong>Pitching too early:</strong> ask questions first, earn the booking.</li>
+            <li><strong>Losing control on “send info”:</strong> “Info without context looks like noise. 15 minutes
+                first.”</li>
+            <li><strong>Talking too much:</strong> 70/30 rule. Ask → pause.</li>
+            <li><strong>No clear leak:</strong> always hit response time + follow-up + drop-off point.</li>
+            <li><strong>Weak close:</strong> always give two times + book live.</li>
+        </ul>
+
+        <p class="goal-text"><strong>Coaching loop:</strong> pick ONE skill → roleplay 10 reps → apply same day →
+            re-score next day.</p>
+
+        <div class="footer">Internal use only | Page 7</div>
+
+        <div class="page-break"></div>
+
+        <h1 id="metrics-targets">Metrics + Performance Targets</h1>
+
+        <h3>Daily + Weekly KPI Targets (Revenue Focused)</h3>
+        <ul>
+            <li><strong>Daily:</strong> 100 dials / 25 conversations / 4–5 bookings / 1–2 Closed Sales</li>
+            <li><strong>Weekly:</strong> 500 dials / 125 conversations / 20–25 bookings / 5–10 Closed Sales</li>
+        </ul>
+
+        <h3>Conversion Benchmarks (Revenue Reverse-Engineered)</h3>
+        <ul>
+            <li><strong>Dials → Connects:</strong> 15–25%</li>
+            <li><strong>Connects → Conversations:</strong> 50–70%</li>
+            <li><strong>Conversations → Bookings:</strong> 25–40%</li>
+            <li><strong>Bookings → Shows:</strong> 70–85%</li>
+            <li><strong>Shows → Revenue (Close):</strong> 40–50%</li>
+        </ul>
+
+        <div class="box">
+            <div class="sub-header">“If you’re behind” playbook (fix your funnel leak)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Broken Metric</th>
+                        <th>Likely Cause</th>
+                        <th>Immediate Fix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Low connects</td>
+                        <td>bad list, wrong times, caller ID issues</td>
+                        <td>Call 8–10am + 4–6pm, improve data, double-tap, local presence</td>
+                    </tr>
+                    <tr>
+                        <td>Low conversations</td>
+                        <td>weak hook, no permission, gatekeeper control</td>
+                        <td>Shorten hook, ask permission, stop explaining—ask questions</td>
+                    </tr>
+                    <tr>
+                        <td>Low bookings</td>
+                        <td>no clear leak, weak close, debating objections</td>
+                        <td>Force leak clarity; always offer two times; don’t argue—reframe and close</td>
+                    </tr>
+                    <tr>
+                        <td>Low show rate</td>
+                        <td>weak expectations, no reminders</td>
+                        <td>SMS immediately + morning-of reminder + “what we’ll accomplish” + reschedule policy</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>48-hour catch-up sprint:</strong> add one extra call block/day (+60 dials), hit all “send info”
+                by phone+SMS, re-attack “call later” with two specific time options, manager audits 5 calls and gives
+                one correction.</p>
+        </div>
+
+        <h3>End-of-day checklist (10 minutes)</h3>
+        <ul>
+            <li>All activities logged</li>
+            <li>Tomorrow’s appointments confirmed via SMS</li>
+            <li>No-shows moved into reschedule sequence</li>
+            <li>Pipeline clean (no fake stages)</li>
+            <li>Send KPI report (dials/connects/convos/bookings/shows)</li>
+        </ul>
+
+        <div class="footer">Internal use only | Page 8</div>
+    </div>
+
+    <script>
+        document.addEventListener('keydown', function(e) {
+            // Block Ctrl+C, Cmd+C, Ctrl+A, Cmd+A
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C' || e.key === 'a' || e.key === 'A')) {
+                e.preventDefault();
+            }
+            // Block Ctrl+P, Cmd+P (Print)
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P')) {
+                e.preventDefault();
+                alert('Printing is disabled for this document.');
+            }
+        });
+    </script>
+</body>
+
+</html>

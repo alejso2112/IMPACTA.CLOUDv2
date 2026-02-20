@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IMPACTA ADMIN CONSOLE</title>
+  <link rel="icon" href="img/favicon-2025.png" type="image/png">
+  <style>
+    /* --- STRATEGIC STYLING --- */
+    :root{
+      --brand:#0c62ab; --brand-dark:#094a80; --ink:#0f172a; --muted:#64748b;
+      --line:#e2e8f0; --bg:#f8fafc; --radius:12px;
+      --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    /* visibility: hidden prevents the UI from flashing before the Admin check clears */
+    body{ margin:0; font-family:var(--sans); color:var(--ink); background: var(--bg); line-height:1.5; font-size: 14px; visibility: hidden; }
+    .wrap{max-width:1600px; margin:0 auto; padding:0 24px}
+    .flex{display:flex; align-items:center; gap:12px}
+    .col{flex-direction:column; align-items:flex-start}
+    
+    /* TOPBAR */
+    .topbar{ position:sticky; top:0; z-index:50; border-bottom:1px solid var(--line); background:#fff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .topbar .inner{ padding:14px 0; display:flex; justify-content:space-between; align-items:center; }
+    .brand h1 { margin:0; font-size:20px; font-weight:800; color:var(--brand); letter-spacing: -0.02em; }
+    .brand p { margin:0; font-size:11px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.05em;}
+    
+    /* BUTTONS */
+    .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:8px 16px; border-radius:8px; border:1px solid transparent; background:var(--brand); color:#fff; font-weight:600; font-size:13px; cursor:pointer; transition:all .15s ease; }
+    .btn:hover{background:var(--brand-dark)}
+    .btn.secondary{background:#fff; color:var(--ink); border:1px solid var(--line);}
+    .btn.secondary:hover{background:#f1f5f9; border-color:#cbd5e1}
+    .btn.danger{background:#fff; color:#b91c1c; border:1px solid #fecaca;}
+    .btn.danger:hover{background:#fef2f2; border-color:#b91c1c}
+
+    /* CARDS */
+    .card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); overflow:hidden; margin-bottom:24px; }
+    .card .hd{ padding:16px 24px; border-bottom:1px solid var(--line); background:#f8fafc; display:flex; justify-content:space-between; align-items:center; }
+    .card .hd h2{ margin:0; font-size:16px; font-weight:700; color:var(--ink); }
+    .card .bd{ padding:24px; }
+
+    /* FILTERS */
+    .filter-bar { display:grid; grid-template-columns: repeat(5, 1fr) auto; gap:10px; margin-bottom:16px; padding:16px; background:#f8fafc; border:1px solid var(--line); border-radius:8px; align-items:end; }
+    .filter-group label { display:block; font-size:11px; font-weight:700; color:#64748b; margin-bottom:4px; text-transform:uppercase; }
+    select, input { width:100%; padding:8px 12px; border-radius:6px; border:1px solid var(--line); font-size:13px; background:#fff; color:var(--ink); outline:none; }
+    
+    .filters { display:flex; gap:16px; flex-wrap:wrap; align-items:flex-end; background:#f1f5f9; padding:16px; border-radius:8px; border:1px solid var(--line); margin-bottom:20px; }
+
+    /* TABLES */
+    .tablewrap{ width:100%; overflow-x:auto; border:1px solid var(--line); border-radius:8px; }
+    table{ width:100%; border-collapse:collapse; background:#fff; }
+    th, td{ padding:12px 16px; border-bottom:1px solid var(--line); text-align:left; font-size:13px; vertical-align:top; }
+    th{ background:#f8fafc; font-weight:700; color:var(--muted); text-transform:uppercase; font-size:11px; white-space:nowrap; position:sticky; top:0; z-index:10; cursor:pointer;}
+    th:hover { color:var(--brand); }
+    tr:last-child td { border-bottom:none; }
+    tr:hover td { background:#f8fafc; }
+    
+    .badge { padding:2px 8px; border-radius:99px; font-size:11px; font-weight:700; background:#e2e8f0; }
+    .badge.admin { background:#dbeafe; color:#1e40af; }
+    input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+
+    /* MODAL */
+    .modal { position:fixed; inset:0; background:rgba(15,23,42,.7); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; padding:20px; z-index:1000; }
+    .modal.open { display:flex; }
+    .modal .panel { width:min(500px, 95%); background:#fff; border-radius:12px; border:1px solid var(--line); overflow:hidden; display:flex; flex-direction:column; box-shadow:0 25px 50px -12px rgba(0,0,0,0.25); }
+    .modal .hd { padding:16px 24px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; background:#fff; }
+    .modal .bd { padding:24px; }
+    textarea.import-area { width:100%; height:200px; padding:12px; border:1px solid var(--line); border-radius:8px; font-family:var(--sans); font-size:13px; resize:vertical; outline:none; background:#f8fafc; }
+
+    .loading { color:var(--muted); font-style:italic; padding:20px; text-align:center; }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="inner">
+        <div class="brand">
+          <h1>IMPACTA ADMIN</h1>
+          <p>Strategic Revenue Console</p>
+        </div>
+        <div class="flex">
+          <span id="adminUser" style="font-size:12px; color:var(--muted); font-weight:600;"></span>
+          <a href="crm.html" class="btn secondary">Open CRM</a>
+          <button class="btn secondary" onclick="logout()">Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap" style="padding-top:30px;">
+    
+    <section class="card">
+      <div class="hd">
+        <div class="flex col" style="gap:2px;">
+          <h2>Global Activity History</h2>
+          <span style="font-size:12px; color:var(--muted);">Real-time monitoring of all agent interactions.</span>
+        </div>
+        <div><button class="btn" onclick="fetchHistory()">🔄 Refresh Data</button></div>
+      </div>
+      <div class="bd">
+        <div class="tablewrap" style="max-height:400px; overflow-y:auto;">
+          <table id="historyTable">
+            <thead>
+              <tr>
+                <th style="width:160px;">Timestamp</th>
+                <th style="width:150px;">Agent</th>
+                <th style="width:150px;">Action</th>
+                <th>Notes / Outcome</th>
+              </tr>
+            </thead>
+            <tbody id="historyBody"><tr><td colspan="4" class="loading">Loading History...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="hd">
+        <h2>Lead Database</h2>
+        <div class="flex">
+            <button class="btn secondary" onclick="openImportModal()">Import Data</button>
+        </div>
+      </div>
+      <div class="bd">
+         
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label>Status</label>
+                <select id="f_stage" onchange="applyFilters()"><option value="">All</option></select>
+            </div>
+            <div class="filter-group">
+                <label>City</label>
+                <select id="f_city" onchange="applyFilters()"><option value="">All</option></select>
+            </div>
+            <div class="filter-group">
+                <label>State</label>
+                <select id="f_state" onchange="applyFilters()"><option value="">All</option></select>
+            </div>
+            <div class="filter-group">
+                <label>Industry</label>
+                <select id="f_industry" onchange="applyFilters()"><option value="">All</option></select>
+            </div>
+            <div class="filter-group">
+                <label>Assigned To</label>
+                <select id="f_assign" onchange="applyFilters()"><option value="unassigned">Unassigned</option></select>
+            </div>
+            <div>
+                <button class="btn secondary" style="width:100%" onclick="resetFilters()">Reset</button>
+            </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px; padding:10px; background:#f1f5f9; border-radius:6px; border:1px solid var(--line);">
+            <span style="font-size:13px; font-weight:600; color:var(--ink);">Bulk Actions:</span>
+            <select id="assignUser" style="width:200px; padding:8px;"><option value="">Select Agent...</option></select>
+            <button class="btn" style="padding:8px 16px;" onclick="assignLeads()">Assign</button>
+            <button class="btn secondary" style="padding:8px 16px;" onclick="bulkUnassign()">Unassign Selected</button>
+            <button class="btn danger" style="padding:8px 16px; margin-left:8px;" onclick="bulkDelete()">Delete Selected</button>
+            
+            <span id="recordCount" style="margin-left:auto; font-size:12px; color:#64748b; font-weight:600;">0 records</span>
+        </div>
+
+         <div class="tablewrap" style="max-height:600px; overflow-y:auto; border:1px solid var(--line);">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:40px; text-align:center;"><input type="checkbox" id="selectAll" onclick="toggleAll(this)"></th>
+                        <th onclick="setSort('company')">Company</th>
+                        <th onclick="setSort('cityClean')">City</th>
+                        <th onclick="setSort('stateExtracted')">State</th>
+                        <th onclick="setSort('industry')">Industry</th>
+                        <th onclick="setSort('assignedName')">Assigned To</th>
+                        <th onclick="setSort('stage')">Stage</th>
+                        <th style="text-align:right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="leadList">
+                    <tr><td colspan="8" class="loading">Loading Leads...</td></tr>
+                </tbody>
+            </table>
+         </div>
+      </div>
+    </section>
+
+    <section class="card">
+        <div class="hd">
+            <div class="flex col" style="gap:2px;">
+                <h2>Personnel & Access Control</h2>
+                <span style="font-size:12px; color:var(--muted);">Manage authorized agents and credentials.</span>
+            </div>
+        </div>
+        <div class="bd">
+            <div class="filters" style="display:grid; grid-template-columns: 2fr 2fr 2fr 1fr 1fr; gap:12px;">
+                <div class="filter-group"><label>Full Name</label><input id="newUserName" placeholder="e.g. John Doe"></div>
+                <div class="filter-group"><label>Email</label><input id="newUserEmail" type="email" placeholder="agent@impacta.com"></div>
+                <div class="filter-group"><label>Password</label><input id="newUserPass" type="text" placeholder="Min 6 chars"></div>
+                <div class="filter-group">
+                    <label>Role</label>
+                    <select id="newUserRole"><option value="agent">Agent</option><option value="admin">Admin</option></select>
+                </div>
+                <div><button class="btn" style="width:100%" onclick="createUser()">+ Create User</button></div>
+            </div>
+            <div class="tablewrap" style="margin-top:20px;">
+                <table>
+                    <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Created</th><th style="text-align:right">Actions</th></tr></thead>
+                    <tbody id="userList"><tr><td colspan="5" class="loading">Loading Personnel...</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+  </main>
+
+  <div class="modal" id="editUserModal">
+    <div class="panel">
+      <div class="hd"><h3>Edit Personnel</h3><button class="btn secondary" onclick="closeModal('editUserModal')">&times;</button></div>
+      <div class="bd">
+        <input type="hidden" id="editUserId">
+        <div class="filter-group" style="margin-bottom:12px;">
+            <label>Full Name</label>
+            <input id="editUserName" style="width:100%" placeholder="Agent Name">
+        </div>
+        <div class="filter-group" style="margin-bottom:12px;">
+            <label>Sign-In Email</label>
+            <input id="editUserEmail" type="email" style="width:100%" placeholder="agent@impacta.cloud">
+        </div>
+        <div class="filter-group" style="margin-bottom:12px;">
+            <label>New Password</label>
+            <input id="editUserPass" type="text" style="width:100%" placeholder="Leave blank to keep current password">
+        </div>
+        <div class="filter-group" style="margin-bottom:16px;">
+            <label>Role</label>
+            <select id="editUserRole" style="width:100%">
+                <option value="agent">Agent</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+        <button class="btn" style="width:100%" onclick="saveUserEdit()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="importModal">
+    <div class="panel">
+      <div class="hd"><h3>Import Data</h3><button class="btn secondary" onclick="closeModal('importModal')">&times;</button></div>
+      <div class="bd">
+        <div style="margin-bottom:12px;">
+            <label style="font-weight:bold; font-size:12px;">Data Type:</label>
+            <select id="importType" style="margin-top:4px;">
+                <option value="leads">Leads (Spreadsheet)</option>
+                <option value="history">Call History (Spreadsheet)</option>
+            </select>
+        </div>
+        <p style="font-size:13px; color:var(--muted); margin-top:0;">Paste directly from Excel or Google Sheets. The tool will auto-detect columns based on headers.</p>
+        <textarea id="importText" class="import-area" placeholder="Paste spreadsheet data here..."></textarea>
+        <button class="btn" style="width:100%; margin-top:12px;" onclick="processImport()">Process Import</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  let allLeads = [];
+  let filteredLeads = [];
+  let allUsers = [];
+  let sortKey = 'company'; 
+  let sortDesc = false;
+
+  async function init() {
+    const userStr = localStorage.getItem('currentUser');
+    
+    // REDIRECT IF NO USER
+    if(!userStr) {
+        window.location.replace('index.html');
+        return;
+    }
+
+    const user = JSON.parse(userStr);
+    
+    // REDIRECT IF NOT ADMIN
+    if(user.role !== 'admin') {
+        alert("Access Denied: Strategic Oversight Clearance Required.");
+        window.location.replace('crm.html');
+        return;
+    }
+
+    // IF ADMIN: Reveal the page
+    document.body.style.visibility = 'visible';
+    document.getElementById('adminUser').textContent = user.name + " (" + user.role + ")";
+    
+    await fetchUsers();
+    await fetchLeads();
+    await fetchHistory(); 
+  }
+
+  // --- API FETCHERS ---
+  async function fetchUsers() {
+      try {
+          const res = await fetch('/api/users');
+          allUsers = await res.json();
+          renderUserTable();
+      } catch (e) { console.error("Error fetching users:", e); }
+  }
+
+  async function fetchLeads() {
+      try {
+          const res = await fetch('/api/leads');
+          const rawLeads = await res.json();
+          
+          allLeads = rawLeads.map(l => {
+              const agent = allUsers.find(u => u.id === l.assignedTo);
+              l.assignedName = agent ? (agent.name || agent.email) : 'Unassigned';
+              
+              if(!l.state && l.city && l.city.includes(',')) {
+                 let parts = l.city.split(',');
+                 l.stateExtracted = parts[parts.length-1].trim();
+                 l.cityClean = parts[0].trim();
+              } else {
+                 l.stateExtracted = l.state || '';
+                 l.cityClean = l.city || '';
+              }
+              return l;
+          });
+
+          populateLeadFilterOptions();
+          applyFilters(); 
+      } catch (e) { console.error("Error fetching leads:", e); }
+  }
+
+  async function fetchHistory() {
+      try {
+          const res = await fetch('/api/activities'); 
+          const logs = await res.json();
+          
+          document.getElementById('historyBody').innerHTML = logs.length === 0 
+            ? '<tr><td colspan="4" class="loading">No history found.</td></tr>'
+            : logs.map(l => `
+                <tr>
+                    <td>${new Date(l.createdAt).toLocaleString()}</td>
+                    <td><span style="font-weight:600">${l.caller}</span></td>
+                    <td><span class="badge">${l.action}</span></td>
+                    <td>${l.note || '-'}</td>
+                </tr>
+            `).join('');
+      } catch (e) { console.error("Error fetching history:", e); }
+  }
+
+  // --- ADVANCED LEAD FILTERS ---
+  function populateLeadFilterOptions() {
+      const build = (key, elId, isAssign=false) => {
+          const counts = {};
+          if(isAssign) counts['unassigned'] = 0;
+          
+          allLeads.forEach(l => {
+              if(isAssign) {
+                  if(!l.assignedTo) counts['unassigned']++;
+                  else counts[l.assignedTo] = (counts[l.assignedTo] || 0) + 1;
+              } else {
+                  const val = l[key] || 'Unknown';
+                  counts[val] = (counts[val] || 0) + 1;
+              }
+          });
+
+          const el = document.getElementById(elId);
+          const current = el.value;
+          let html = '<option value="">All</option>';
+          
+          if(isAssign) {
+              html += `<option value="unassigned">Unassigned (${counts['unassigned']})</option>`;
+              allUsers.filter(u => u.role === 'agent').forEach(u => {
+                  html += `<option value="${u.id}">${u.name || u.email} (${counts[u.id] || 0})</option>`;
+              });
+
+              const assignDropdown = document.getElementById('assignUser');
+              let assignHtml = '<option value="">Select Agent...</option>';
+              allUsers.filter(u => u.role === 'agent').forEach(u => {
+                  assignHtml += `<option value="${u.id}">${u.name || u.email}</option>`;
+              });
+              assignDropdown.innerHTML = assignHtml;
+
+          } else {
+              Object.keys(counts).sort().forEach(k => {
+                  if(k && k !== 'Unknown') html += `<option value="${k}">${k} (${counts[k]})</option>`;
+              });
+          }
+          el.innerHTML = html;
+          el.value = current || (isAssign && current === '' ? 'unassigned' : '');
+          if(isAssign && current === 'unassigned') el.value = 'unassigned';
+      };
+
+      build('stage', 'f_stage');
+      build('cityClean', 'f_city');
+      build('stateExtracted', 'f_state');
+      build('industry', 'f_industry');
+      build('assignedTo', 'f_assign', true);
+  }
+
+  function applyFilters() {
+      const s_stage = document.getElementById('f_stage').value;
+      const s_city = document.getElementById('f_city').value;
+      const s_state = document.getElementById('f_state').value;
+      const s_ind = document.getElementById('f_industry').value;
+      const s_assign = document.getElementById('f_assign').value;
+
+      filteredLeads = allLeads.filter(l => {
+          if(s_stage && l.stage !== s_stage) return false;
+          if(s_city && l.cityClean !== s_city) return false;
+          if(s_state && l.stateExtracted !== s_state) return false;
+          if(s_ind && (l.industry || 'Unknown') !== s_ind) return false;
+          if(s_assign === 'unassigned') { if(l.assignedTo) return false; }
+          else if(s_assign && l.assignedTo !== s_assign) return false;
+          return true;
+      });
+
+      renderTable();
+  }
+
+  function resetFilters() {
+      document.getElementById('f_stage').value = '';
+      document.getElementById('f_city').value = '';
+      document.getElementById('f_state').value = '';
+      document.getElementById('f_industry').value = '';
+      document.getElementById('f_assign').value = 'unassigned';
+      applyFilters();
+  }
+
+  // --- RENDER TABLES ---
+  function renderTable() {
+      const tbody = document.getElementById('leadList');
+      tbody.innerHTML = '';
+      document.getElementById('recordCount').textContent = `${filteredLeads.length} records`;
+      document.getElementById('selectAll').checked = false;
+
+      filteredLeads.sort((a,b) => {
+          let va = a[sortKey] || ''; let vb = b[sortKey] || '';
+          if (typeof va === 'string') va = va.toLowerCase();
+          if (typeof vb === 'string') vb = vb.toLowerCase();
+          if(sortDesc) return va < vb ? 1 : -1;
+          return va < vb ? -1 : 1;
+      });
+
+      const renderLimit = filteredLeads.slice(0, 200);
+
+      if (renderLimit.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8" class="loading">No leads found.</td></tr>';
+          return;
+      }
+
+      renderLimit.forEach(l => {
+          let actions = '';
+          if(l.assignedTo) actions += `<button class="btn secondary" style="padding:4px 8px; font-size:11px; margin-right:6px;" onclick="unassignSingle('${l.id}')">Unassign</button>`;
+          actions += `<button class="btn danger" style="padding:4px 8px; font-size:11px;" onclick="deleteSingle('${l.id}')">🗑</button>`;
+          
+          const assignDisplay = l.assignedTo ? l.assignedName : '<span style="color:#b91c1c; font-weight:700;">Unassigned</span>';
+
+          tbody.innerHTML += `
+            <tr>
+                <td style="text-align:center;"><input type="checkbox" class="lead-check" value="${l.id}"></td>
+                <td style="font-weight:600">${l.company || 'Unknown'}</td>
+                <td>${l.cityClean}</td>
+                <td>${l.stateExtracted}</td>
+                <td>${l.industry || '-'}</td>
+                <td style="font-size:12px">${assignDisplay}</td>
+                <td><span class="badge">${l.stage}</span></td>
+                <td style="text-align:right">${actions}</td>
+            </tr>`;
+      });
+  }
+
+  function renderUserTable() {
+      const tbody = document.getElementById('userList');
+      tbody.innerHTML = allUsers.map(u => `
+        <tr>
+            <td style="font-weight:600">${u.name}</td>
+            <td>${u.email}</td>
+            <td><span class="badge ${u.role === 'admin' ? 'admin' : ''}">${u.role}</span></td>
+            <td style="color:var(--muted); font-size:12px;">${u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'Pre-loaded'}</td>
+            <td style="text-align:right">
+                <button class="btn secondary" style="padding:4px 8px; font-size:11px; margin-right:4px;" onclick="openEditUser('${u.id}')">Edit</button>
+                <button class="btn danger" style="padding:4px 8px; font-size:11px;" onclick="deleteUser('${u.id}')">Remove</button>
+            </td>
+        </tr>`).join('');
+  }
+
+  // --- BULK OPERATIONS ---
+  function toggleAll(src) { document.querySelectorAll('.lead-check').forEach(cb => cb.checked = src.checked); }
+  function getChecked() { return Array.from(document.querySelectorAll('.lead-check:checked')).map(cb => cb.value); }
+
+  async function assignLeads() {
+      const uid = document.getElementById('assignUser').value;
+      const ids = getChecked();
+      if(!uid) return alert('Select Agent');
+      if(ids.length === 0) return alert('No leads selected');
+      
+      const btn = event.target;
+      btn.textContent = "Assigning...";
+      btn.disabled = true;
+
+      await Promise.all(ids.map(id => fetch(`/api/leads/${id}`, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ assignedTo: uid })
+      })));
+
+      btn.textContent = "Assign";
+      btn.disabled = false;
+      alert('Assigned successfully!');
+      fetchLeads();
+  }
+
+  async function bulkUnassign() {
+      const ids = getChecked();
+      if(ids.length === 0) return alert('No leads selected');
+      if(!confirm(`Unassign ${ids.length} leads?`)) return;
+      
+      const btn = event.target;
+      btn.textContent = "Unassigning...";
+      btn.disabled = true;
+
+      await Promise.all(ids.map(id => fetch(`/api/leads/${id}`, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ assignedTo: null })
+      })));
+
+      btn.textContent = "Unassign Selected";
+      btn.disabled = false;
+      alert('Unassigned successfully!');
+      fetchLeads();
+  }
+  
+  async function bulkDelete() {
+      const ids = getChecked();
+      if(ids.length === 0) return alert('No leads selected');
+      if(!confirm(`DELETE ${ids.length} leads? This cannot be undone.`)) return;
+      
+      const btn = event.target;
+      btn.textContent = "Deleting...";
+      btn.disabled = true;
+
+      await Promise.all(ids.map(id => fetch(`/api/leads/${id}`, { method: 'DELETE' })));
+
+      btn.textContent = "Delete Selected";
+      btn.disabled = false;
+      alert('Deleted successfully!');
+      fetchLeads();
+  }
+
+  async function unassignSingle(id) { 
+      await fetch(`/api/leads/${id}`, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({ assignedTo: null })
+      });
+      fetchLeads();
+  }
+
+  async function deleteSingle(id) { 
+      if(confirm('Delete this lead?')) {
+          await fetch(`/api/leads/${id}`, { method: 'DELETE' });
+          fetchLeads();
+      }
+  }
+
+  // --- USER ACTIONS (Create / Edit / Delete) ---
+  async function createUser() {
+    const name = document.getElementById('newUserName').value; 
+    const email = document.getElementById('newUserEmail').value;
+    const password = document.getElementById('newUserPass').value;
+    const role = document.getElementById('newUserRole').value;
+    
+    if (!email || !password || !name) return alert('Fill all fields');
+
+    await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password, role })
+    });
+
+    document.getElementById('newUserName').value = '';
+    document.getElementById('newUserEmail').value = '';
+    document.getElementById('newUserPass').value = '';
+    fetchUsers();
+  }
+
+  function openEditUser(id) {
+      const u = allUsers.find(x => x.id === id);
+      if(!u) return;
+      document.getElementById('editUserId').value = id;
+      document.getElementById('editUserName').value = u.name || '';
+      document.getElementById('editUserEmail').value = u.email || '';
+      document.getElementById('editUserPass').value = ''; // Left blank intentionally
+      document.getElementById('editUserRole').value = u.role || 'agent';
+      document.getElementById('editUserModal').classList.add('open');
+  }
+
+  async function saveUserEdit() {
+      const id = document.getElementById('editUserId').value;
+      const name = document.getElementById('editUserName').value.trim();
+      const email = document.getElementById('editUserEmail').value.trim();
+      const password = document.getElementById('editUserPass').value.trim();
+      const role = document.getElementById('editUserRole').value;
+
+      if (!email || !name) return alert('Name and Email are required.');
+
+      const updates = { name, email, role };
+      if (password) updates.password = password; // Attach new pass only if typed
+
+      try {
+          await fetch(`/api/users/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(updates)
+          });
+
+          alert('User profile updated successfully.');
+          closeModal('editUserModal');
+          fetchUsers();
+      } catch (err) {
+          console.error(err);
+          alert('Failed to update user.');
+      }
+  }
+
+  async function deleteUser(id) {
+      if(!confirm('Are you sure you want to remove this user?')) return;
+      await fetch(`/api/users/${id}`, { method: 'DELETE' });
+      fetchUsers();
+  }
+
+  // --- TAB-SEPARATED IMPORT LOGIC ---
+  function openImportModal() { document.getElementById('importModal').classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+  async function processImport() {
+      const txt = document.getElementById('importText').value;
+      const type = document.getElementById('importType').value;
+      if(!txt) return alert("Please paste spreadsheet data.");
+
+      const lines = txt.trim().split(/\r?\n/);
+      const headers = lines[0].split('\t').map(h => h.trim().toLowerCase());
+
+      const btn = document.querySelector('#importModal .btn');
+      btn.textContent = "Importing...";
+      btn.disabled = true;
+
+      for (let i = 1; i < lines.length; i++) {
+          const rowRaw = lines[i].split('\t');
+          if(rowRaw.length < 2) continue; 
+
+          const getVal = (colName) => {
+              const idx = headers.indexOf(colName.toLowerCase());
+              if (idx === -1) return '';
+              const val = rowRaw[idx] ? rowRaw[idx].trim() : '';
+              return val === 'undefined' ? '' : val;
+          };
+
+          if (type === 'leads') {
+              const payload = {
+                  id: getVal('lead id'),
+                  company: getVal('company'),
+                  city: getVal('city'),
+                  industry: getVal('industry'),
+                  phone: getVal('phone'),
+                  email: getVal('email'),
+                  stage: getVal('stage') || 'New Lead',
+                  nextAction: getVal('next action'),
+                  gbp1: getVal('gbp 1'),
+                  gbp2: getVal('gbp 2'),
+                  gbp3: getVal('gbp 3'),
+                  recommendation: getVal('recommendation'),
+                  notes: getVal('initial notes'),
+                  createdAt: getVal('created at') || new Date().toISOString()
+              };
+
+              await fetch('/api/leads', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+              });
+          } 
+          else if (type === 'history') {
+              const payload = {
+                  leadId: getVal('lead id'),
+                  caller: getVal('agent'),
+                  action: getVal('action'),
+                  note: getVal('call notes/outcome'),
+                  createdAt: getVal('timestamp') ? new Date(getVal('timestamp')).toISOString() : new Date().toISOString()
+              };
+
+              await fetch('/api/activities', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+              });
+          }
+      }
+      
+      alert('Import successful!');
+      closeModal('importModal');
+      document.getElementById('importText').value = '';
+      btn.textContent = "Process Import";
+      btn.disabled = false;
+      
+      fetchLeads(); 
+      fetchHistory();
+  }
+
+  window.setSort = (key) => { 
+      if(sortKey === key) sortDesc = !sortDesc; 
+      else { sortKey = key; sortDesc = true; }
+      renderTable(); 
+  };
+
+  function logout() { 
+      localStorage.removeItem('currentUser');
+      window.location.href = 'index.html'; 
+  }
+  
+  init();
+</script>
+</body>
+</html>

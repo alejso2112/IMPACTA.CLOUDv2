@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login | IMPACTA CRM</title>
+  <style>
+    :root { --brand: #0c62ab; --bg: #f1f5f9; --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    body { margin: 0; font-family: var(--font); background: var(--bg); display: flex; align-items: center; justify-content: center; height: 100vh; }
+    .card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+    .logo { height: 50px; margin-bottom: 20px; }
+    input { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+    button { width: 100%; padding: 12px; background: var(--brand); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    button:hover { opacity: 0.9; }
+    .error { color: #b91c1c; font-size: 13px; margin-top: 10px; display: none; }
+    .legal-footer { margin-top: 25px; padding-top: 15px; border-top: 1px solid #f1f5f9; font-size: 13px; color: #64748b; }
+    .legal-footer a { color: var(--brand); text-decoration: none; font-weight: 500; }
+    .legal-footer a:hover { text-decoration: underline; }
+  </style>
+  <link rel="icon" href="img/favicon-2025.png" type="image/png">
+</head>
+<body>
+  <div class="card">
+    <img src="img/logo-main-2026.png" alt="IMPACTA" class="logo" onerror="this.style.display='none'">
+    <h2 style="margin:0 0 20px 0; color:#0f172a;">Sign In</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit" id="btn">Login</button>
+      <div class="error" id="errorMsg"></div>
+    </form>
+
+    <div class="legal-footer">
+        Need to review terms? <br>
+        <a href="https://form.jotform.com/260354129333048" target="_blank">View Contractor Agreement</a>
+    </div>
+  </div>
+
+  <script>
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('btn');
+    const err = document.getElementById('errorMsg');
+    
+    btn.textContent = 'Verifying...';
+    btn.disabled = true;
+    err.style.display = 'none';
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        
+        const data = await response.json();
+
+        if (data.success) {
+            localStorage.setItem('currentUser', JSON.stringify(data.user));
+            // Route based on User Role
+            window.location.href = data.user.role === 'admin' ? 'admin.html' : 'crm.html';
+        } else {
+            throw new Error(data.message);
+        }
+    } catch (error) {
+        console.error(error);
+        err.textContent = "Login Failed: " + error.message;
+        err.style.display = 'block';
+        btn.textContent = 'Login';
+        btn.disabled = false;
+    }
+  });
+  </script>
+</body>
+</html>
