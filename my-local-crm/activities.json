@@ -1,0 +1,38 @@
+[
+  {
+    "leadId": "1771504107792",
+    "action": "Call Attempt",
+    "note": "",
+    "caller": "Local Agent",
+    "duration": "00:02",
+    "createdAt": "2026-02-19T14:55:34.782Z",
+    "id": "1771512934794"
+  },
+  {
+    "leadId": "1771504107792",
+    "action": "Call Attempt",
+    "note": "[Call: 00:03] ",
+    "caller": "Alex Soto",
+    "duration": "00:03",
+    "createdAt": "2026-02-19T15:01:17.110Z",
+    "id": "1771513277120"
+  },
+  {
+    "leadId": "1771525415364",
+    "action": "Call Attempt",
+    "note": "[Call: 00:10] [Call: 00:06] ",
+    "caller": "Alex Soto",
+    "duration": "00:10",
+    "createdAt": "2026-02-19T18:23:58.305Z",
+    "id": "1771525438306"
+  },
+  {
+    "leadId": "08RKkilesoTLWCYkpOsu",
+    "action": "Call Attempt",
+    "note": "[Call: 00:11] fff",
+    "caller": "Test User",
+    "duration": "00:11",
+    "createdAt": "2026-02-20T04:47:11.089Z",
+    "id": "1771562831107"
+  }
+]

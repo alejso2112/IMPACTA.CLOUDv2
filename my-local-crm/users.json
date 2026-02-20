@@ -1,0 +1,75 @@
+[
+  {
+    "id": "1",
+    "name": "Dan",
+    "email": "dan@impactabusiness.solutions",
+    "password": "GreenLake68!",
+    "role": "agent"
+  },
+  {
+    "id": "2",
+    "name": "Lorenzo",
+    "email": "lorenzo@impactabusiness.solutions",
+    "password": "CUq38msms!!!",
+    "role": "agent"
+  },
+  {
+    "id": "3",
+    "name": "Mike",
+    "email": "mike.Luscinski@impactabusiness.solutions",
+    "password": "PandaBlu3!!!",
+    "role": "agent"
+  },
+  {
+    "id": "6",
+    "name": "Colesha",
+    "email": "colesha@impactabusiness.solutions",
+    "password": "CrimsonGr33n!",
+    "role": "agent"
+  },
+  {
+    "id": "7",
+    "name": "Rickey",
+    "email": "sirwilliams760@yahoo.com",
+    "password": "GreyBlu3!!!!",
+    "role": "agent"
+  },
+  {
+    "id": "8",
+    "name": "Matt",
+    "email": "matthew@impactabusiness.solutions",
+    "password": "5kyBlue45!!!",
+    "role": "agent"
+  },
+  {
+    "id": "9",
+    "name": "Alex Soto",
+    "email": "alex@impactabusiness.solutions",
+    "password": "L!ly36873687",
+    "role": "admin"
+  },
+  {
+    "name": "Alex Sareyani",
+    "email": "alex.sareyani@impactabusiness.solutions",
+    "password": "OLED4k!!!",
+    "role": "agent",
+    "id": "1771530944602",
+    "createdAt": "2026-02-19T19:55:44.603Z"
+  },
+  {
+    "name": "Anthony Cagle",
+    "email": "anthony@impactabusiness.solutions",
+    "password": "B4tm4n!!",
+    "role": "agent",
+    "id": "1771555757492",
+    "createdAt": "2026-02-20T02:49:17.492Z"
+  },
+  {
+    "name": "Test User",
+    "email": "test@impactabusiness.solutions",
+    "password": "testtest",
+    "role": "agent",
+    "id": "1771556067602",
+    "createdAt": "2026-02-20T02:54:27.602Z"
+  }
+]
