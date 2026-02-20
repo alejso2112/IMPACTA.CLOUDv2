@@ -13,7 +13,9 @@
     button { width: 100%; padding: 12px; background: var(--brand); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
     button:hover { opacity: 0.9; }
     .error { color: #b91c1c; font-size: 13px; margin-top: 10px; display: none; }
-    .legal-footer { margin-top: 25px; padding-top: 15px; border-top: 1px solid #f1f5f9; font-size: 13px; color: #64748b; }
+    
+    /* Footer link area */
+    .legal-footer { margin-top: 25px; pt: 15px; border-top: 1px solid #f1f5f9; font-size: 13px; color: #64748b; }
     .legal-footer a { color: var(--brand); text-decoration: none; font-weight: 500; }
     .legal-footer a:hover { text-decoration: underline; }
   </style>
@@ -21,7 +23,7 @@
 </head>
 <body>
   <div class="card">
-    <img src="img/logo-main-2026.png" alt="IMPACTA" class="logo" onerror="this.style.display='none'">
+    <img src="img/logo-main-2026.png" alt="IMPACTA" class="logo">
     <h2 style="margin:0 0 20px 0; color:#0f172a;">Sign In</h2>
     <form id="loginForm">
       <input type="email" id="email" placeholder="Email" required />
@@ -37,42 +39,56 @@
   </div>
 
   <script>
-  document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = document.getElementById('btn');
-    const err = document.getElementById('errorMsg');
-    
-    btn.textContent = 'Verifying...';
-    btn.disabled = true;
-    err.style.display = 'none';
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const btn = document.getElementById('btn');
+      const err = document.getElementById('errorMsg');
+      
+      btn.textContent = 'Authenticating...';
+      err.style.display = 'none';
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
 
-    try {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
-        
-        const data = await response.json();
+      try {
+          // Point to your server.js /api/login endpoint
+          const response = await fetch('/api/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password })
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+              // Create the session payload using the safeUser object returned by the server
+              const sessionData = {
+                  uid: data.user.id, 
+                  email: data.user.email,
+                  role: data.user.role || 'agent',
+                  name: data.user.name
+              };
+              
+              // Save to localStorage
+              localStorage.setItem('currentUser', JSON.stringify(sessionData));
 
-        if (data.success) {
-            localStorage.setItem('currentUser', JSON.stringify(data.user));
-            // Route based on User Role
-            window.location.href = data.user.role === 'admin' ? 'admin.html' : 'crm.html';
-        } else {
-            throw new Error(data.message);
-        }
-    } catch (error) {
-        console.error(error);
-        err.textContent = "Login Failed: " + error.message;
-        err.style.display = 'block';
-        btn.textContent = 'Login';
-        btn.disabled = false;
-    }
-  });
+              // Instantly route based on role
+              if (sessionData.role === 'admin') {
+                  window.location.replace('admin.html');
+              } else {
+                  window.location.replace('crm.html');
+              }
+          } else {
+              // Triggered if server returns {success: false, message: "Invalid credentials"}
+              throw new Error(data.message || "Invalid email or password.");
+          }
+      } catch (error) {
+          err.textContent = error.message;
+          err.style.display = 'block';
+          btn.textContent = 'Login';
+      }
+    });
   </script>
 </body>
 </html>
